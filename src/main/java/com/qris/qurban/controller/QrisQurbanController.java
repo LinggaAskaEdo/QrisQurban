@@ -17,6 +17,12 @@ public class QrisQurbanController
         this.buildProperties = buildProperties;
     }
 
+    @GetMapping("/")
+    public ResponseEntity<String> getHome()
+    {
+        return ResponseEntity.ok("Hello World !!!");
+    }
+
     @GetMapping("/version")
     public ResponseEntity<String> getVersion()
     {
