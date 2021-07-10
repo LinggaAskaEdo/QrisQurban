@@ -33,10 +33,10 @@ springBoot {
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
 
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'com.qris.qurban.Application'
-        )
-    }
-}
+//jar {
+//    manifest {
+//        attributes(
+//                'Main-Class': 'com.qris.qurban.Application'
+//        )
+//    }
+//}
