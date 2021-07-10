@@ -1,2 +1,2 @@
 # QrisQurban
-Program to help qurban distributor
+Program to help distribute qurban
