@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="log-path">/Users/lingga.putra/Downloads/Logs/edelwish-service</Property>
+    </Properties>
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%T] [%X{requestId}] %level %logger{10} - %msg%n"/>
+        </Console>
+        <RollingFile name="LogToFile" fileName="${log-path}/edelwish-service.log" filePattern="${log-path}/edelwish-service-%d{yyyy-MM-dd}-%i.old.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%T] [%X{requestId}] %level %logger{10} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10000 KB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.edelwish" level="DEBUG" additivity="false">
+            <AppenderRef ref="LogToFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
