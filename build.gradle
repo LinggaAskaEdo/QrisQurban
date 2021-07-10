@@ -29,3 +29,7 @@ test {
 springBoot {
     buildInfo()
 }
+
+task stage {
+    dependsOn build
+}
