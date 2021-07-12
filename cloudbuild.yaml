@@ -6,5 +6,5 @@ steps:
     entrypoint: gradle
     args: ["assemble"]
   - name: gcr.io/cloud-builders/docker
-    args: ["build", "-t", "gcr.io/qrisqurban/qris-qurban", "--build-arg=JAR_FILE=build/libs/QrisQurban-0.0.1-SNAPSHOT.jar", "."]
+    args: ["build", "-t", "gcr.io/qrisqurban/qris-qurban", "--build-arg=JAR_FILE=build/libs/QrisQurban-0.0.2.jar", "."]
 images: ["gcr.io/qrisqurban/qris-qurban"]
