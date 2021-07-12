@@ -1,0 +1,10 @@
+steps:
+  - name: gradle:5.6.2-jdk8
+    entrypoint: gradle
+    args: ["test"]
+  - name: gradle:5.6.2-jdk8
+    entrypoint: gradle
+    args: ["assemble"]
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-t", "gcr.io/qrisqurban/qris-qurban", "--build-arg=JAR_FILE=build/libs/QrisQurban-0.0.1-SNAPSHOT.jar", "."]
+images: ["gcr.io/qrisqurban/qris-qurban"]
