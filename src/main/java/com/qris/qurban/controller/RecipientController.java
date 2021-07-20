@@ -1,7 +1,6 @@
 package com.qris.qurban.controller;
 
 import com.qris.qurban.model.Request;
-import com.qris.qurban.model.entity.Admin;
 import com.qris.qurban.model.entity.Recipient;
 import com.qris.qurban.service.RecipientService;
 import org.springframework.beans.factory.annotation.Autowired;

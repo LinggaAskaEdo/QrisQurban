@@ -25,12 +25,12 @@ public class Request
     @NotBlank(groups = AddRecipient.class)
     private String recipientName;
 
-    @NotBlank(groups = {AddRecipient.class, RecipientLogin.class})
-    @Email(groups = {AddRecipient.class, RecipientLogin.class})
+    @NotBlank(groups = {AddRecipient.class, RecipientLogin.class, ReceivePackage.class})
+    @Email(groups = {AddRecipient.class, RecipientLogin.class, ReceivePackage.class})
     private String recipientEmail;
 
-    @NotBlank(groups = AddRecipient.class)
-    @Size(groups = AddRecipient.class, max = 15)
+    @NotBlank(groups = {AddRecipient.class, ReceivePackage.class})
+    @Size(groups = {AddRecipient.class, ReceivePackage.class}, max = 15)
     @Pattern(groups = AddRecipient.class, regexp = "^(\\+62|62)?[\\s-]?0?8[1-9]{1}\\d{1}[\\s-]?\\d{4}[\\s-]?\\d{2,5}$", message = "Value must be in Indonesia mobile number format eg. 6281911111111")
     private String recipientPhone;
 
@@ -39,9 +39,9 @@ public class Request
     @Gender(groups = AddRecipient.class)
     private String recipientGender;
 
-    @NotBlank(groups = AddRecipient.class)
-    @Size(groups = AddRecipient.class, min = 4, max = 4, message = "size must be 4")
-    @Pattern(groups = AddRecipient.class, regexp = "[0-9]+", message = "Value must be numeric")
+    @NotBlank(groups = {AddRecipient.class, ReceivePackage.class})
+    @Size(groups = {AddRecipient.class, ReceivePackage.class}, min = 4, max = 4, message = "size must be 4")
+    @Pattern(groups = {AddRecipient.class, ReceivePackage.class}, regexp = "[0-9]+", message = "Value must be numeric")
     private String recipientYear;
 
     @NotBlank(groups = RecipientLogin.class)
@@ -57,6 +57,9 @@ public class Request
     {}
 
     public interface RecipientLogin
+    {}
+
+    public interface ReceivePackage
     {}
 
     public String getAdminName()
