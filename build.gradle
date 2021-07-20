@@ -1,25 +1,43 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.2'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+    id("java")
+    id("org.springframework.boot") version "2.5.2"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
 }
 
 group = 'com.qris.qurban'
-version = '0.0.2'
+version = '0.0.3'
 sourceCompatibility = '1.8'
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }
     maven { url 'https://repo.spring.io/snapshot' }
 }
 
+configurations.all {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-//    implementation 'mysql:mysql-connector-java'
-    implementation 'com.google.code.gson:gson'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // import a BOM
+    implementation platform('com.google.cloud:libraries-bom:20.8.0')
+
+    // define dependencies
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation('org.springframework.boot:spring-boot-starter-log4j2')
+    implementation('mysql:mysql-connector-java')
+    implementation('com.google.code.gson:gson')
+    implementation('com.google.cloud:google-cloud-storage')
+    implementation('com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3')
+    implementation('commons-codec:commons-codec:1.9')
+    implementation('commons-io:commons-io:2.5')
+    implementation('org.apache.httpcomponents:httpclient:4.5.10')
+    implementation('com.google.zxing:core:3.3.0')
+    implementation('com.google.zxing:javase:3.3.0')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
@@ -32,22 +50,3 @@ springBoot {
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
-
-//task copyToLib(type: Copy) {
-//    into "$buildDir/libs"
-//    from(configurations.compile)
-//}
-
-//task copyToLib() {
-//    doLast {
-//        println '>>>' + project(':jar').configurations.compile.dependencies
-//    }
-//}
-//stage.dependsOn(copyToLib)
-
-//gradle.taskGraph.whenReady {
-//    taskGraph ->
-//        if (taskGraph.hasTask(stage)) {
-//            test.enabled = false
-//        }
-//}
