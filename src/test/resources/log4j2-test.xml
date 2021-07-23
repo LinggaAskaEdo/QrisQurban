@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%T] [%X{requestId}] %level %logger{10} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="unit-test" level="DEBUG" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+    </Loggers>
+</Configuration>
