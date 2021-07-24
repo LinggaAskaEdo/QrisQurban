@@ -20,6 +20,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.util.EnumMap;
@@ -173,5 +175,19 @@ public class QrisQurbanUtil
         }
 
         return image;
+    }
+
+    public boolean urlValidator(String url)
+    {
+        try
+        {
+            new URL(url).toURI();
+
+            return true;
+        }
+        catch (URISyntaxException | MalformedURLException exception)
+        {
+            return false;
+        }
     }
 }

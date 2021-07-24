@@ -3,19 +3,14 @@ package com.qris.qurban.ws;
 import com.qris.qurban.model.Transaction;
 import com.qris.qurban.model.exception.InternalServerErrorException;
 import com.qris.qurban.preference.ConfigPreference;
+import com.qris.qurban.util.QrisQurbanUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class QrisQurbanRest
@@ -23,13 +18,16 @@ public class QrisQurbanRest
     private static final Logger logger = LogManager.getLogger();
 
     private static final String ENCODE = "UTF-8";
+
     private final ConfigPreference preference;
+    private final QrisQurbanUtil util;
     private final RestTemplate restTemplate;
 
     @Autowired
-    public QrisQurbanRest(ConfigPreference preference, RestTemplate restTemplate)
+    public QrisQurbanRest(ConfigPreference preference, QrisQurbanUtil util, RestTemplate restTemplate)
     {
         this.preference = preference;
+        this.util = util;
         this.restTemplate = restTemplate;
     }
 
@@ -39,23 +37,34 @@ public class QrisQurbanRest
 
         try
         {
-            String text =  preference.masjidText + " " + recipientPhoto + "\n\nUsername: " + recipientEmail + "\nPassword: " + recipientPassword;
-
-            logger.debug("message: {}", text);
-
             String sendMessageUrl = preference.apiwhaUrlSendMessage + URLEncoder.encode(preference.apiwhaApiKey, ENCODE)
                     + "&number=" + URLEncoder.encode(recipientPhone, ENCODE)
-                    + "&text=" + text;
+                    + "&text=";
 
-            Transaction transaction = restTemplate.getForObject(sendMessageUrl, Transaction.class);
-
-            if (null != transaction)
+            if (util.urlValidator(sendMessageUrl))
             {
-                logger.debug("Sending message to {} is {}, description={}, code={}", recipientPhone, transaction.getSuccess() ? "success" : "failed", transaction.getDescription(), transaction.getResultCode());
-                result = true;
+                logger.debug("{} is valid URL", sendMessageUrl);
+
+                String text =  preference.masjidText + " " + recipientPhoto + "\n\nUsername: " + recipientEmail + "\nPassword: " + recipientPassword;
+
+                logger.debug("text: {}", text);
+
+                Transaction transaction = restTemplate.getForObject(sendMessageUrl + text, Transaction.class);
+
+                if (null != transaction)
+                {
+                    logger.debug("Sending message to {} is {}, description={}, code={}", recipientPhone, transaction.getSuccess() ? "success" : "failed", transaction.getDescription(), transaction.getResultCode());
+                    result = true;
+                }
+                else
+                {
+                    logger.debug("Sending message to {} is failed", recipientPhone);
+                }
             }
             else
-                logger.debug("Sending message to {} is failed", recipientPhone);
+            {
+                logger.debug("{} is not valid URL", sendMessageUrl);
+            }
         }
         catch (Exception e)
         {
