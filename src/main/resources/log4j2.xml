@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Properties>
-        <Property name="log-path">/Users/lingga.putra/Downloads/Logs/qris-qurban-service</Property>
+<!--        <Property name="log-path">/Users/lingga.putra/Downloads/Logs/qris-qurban-service</Property>-->
+        <Property name="log-path">/var/log/app/qris-qurban-service</Property>
     </Properties>
     <Appenders>
         <Console name="LogToConsole" target="SYSTEM_OUT">
