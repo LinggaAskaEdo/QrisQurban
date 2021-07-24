@@ -375,6 +375,7 @@ public class LoggingFilter implements Filter
         @Override
         public void addCookie(Cookie cookie)
         {
+            cookie.setSecure(true);
             original.addCookie(cookie);
         }
 

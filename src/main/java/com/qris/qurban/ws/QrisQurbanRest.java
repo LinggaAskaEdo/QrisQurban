@@ -47,12 +47,6 @@ public class QrisQurbanRest
                     + "&number=" + URLEncoder.encode(recipientPhone, ENCODE)
                     + "&text=" + text;
 
-            List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-            MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-            converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-            messageConverters.add(converter);
-            restTemplate.setMessageConverters(messageConverters);
-
             Transaction transaction = restTemplate.getForObject(sendMessageUrl, Transaction.class);
 
             if (null != transaction)
