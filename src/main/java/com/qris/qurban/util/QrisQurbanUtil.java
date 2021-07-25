@@ -25,12 +25,17 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class QrisQurbanUtil
 {
     private static final Logger logger = LogManager.getLogger();
+
+    List<String> sortList = Stream.of("ASC", "DESC").collect(Collectors.toList());
 
     private static final int BLACK = 0xFF000000;
     private static final int WHITE = 0xFFFFFFFF;
@@ -189,5 +194,10 @@ public class QrisQurbanUtil
         {
             return false;
         }
+    }
+
+    public boolean checkSortOrderType(String data)
+    {
+        return sortList.stream().anyMatch(x -> x.equalsIgnoreCase(data));
     }
 }

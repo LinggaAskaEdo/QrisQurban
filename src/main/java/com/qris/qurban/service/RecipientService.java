@@ -79,8 +79,6 @@ public class RecipientService
 
     private void getSortDirection(List<Order> orders, String[] sort)
     {
-        logger.debug("sort: {}", Arrays.toString(sort));
-
         for (String sortOrder : sort)
         {
             if (sortOrder.contains(","))
@@ -88,7 +86,7 @@ public class RecipientService
                 String[] sortOrderSplit = sortOrder.split(",");
                 orders.add(new Order(sortOrderSplit[1].equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortOrderSplit[0]));
             }
-            else
+            else if (!util.checkSortOrderType(sortOrder))
             {
                 orders.add(new Order(Sort.Direction.ASC, sortOrder));
             }
