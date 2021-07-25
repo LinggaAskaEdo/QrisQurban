@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,5 +43,17 @@ class QrisQurbanUtilTest
         logger.info("Result: {}", result);
 
         assertNotNull(result);
+    }
+
+    @Test
+    void testSortStringArr()
+    {
+        String[] strArr = new String[2];
+        strArr[0] = "id,asc";
+        strArr[1] = "year,desc";
+
+        logger.debug(Arrays.toString(strArr));
+
+        assertNotNull(strArr);
     }
 }

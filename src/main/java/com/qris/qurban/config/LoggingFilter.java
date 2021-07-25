@@ -397,13 +397,21 @@ public class LoggingFilter implements Filter
             return original.encodeRedirectURL(url);
         }
 
+        /**
+         * @deprecated (Bundle with springboot)
+         */
         @Override
+        @Deprecated
         public String encodeUrl(String url)
         {
             return original.encodeURL(url);
         }
 
+        /**
+         * @deprecated (Bundle with springboot)
+         */
         @Override
+        @Deprecated
         public String encodeRedirectUrl(String url)
         {
             return original.encodeRedirectURL(url);
@@ -469,7 +477,11 @@ public class LoggingFilter implements Filter
             original.setStatus(sc);
         }
 
+        /**
+         * @deprecated (Bundle with springboot)
+         */
         @Override
+        @Deprecated
         public void setStatus(int sc, String sm)
         {
             try
