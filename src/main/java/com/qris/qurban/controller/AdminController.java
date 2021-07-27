@@ -40,7 +40,7 @@ public class AdminController
         return adminService.createAdmin(persistentAdmin);
     }
 
-    @GetMapping("/admin-login")
+    @PostMapping("/admin-login")
     public Admin adminLogin(@Validated({Request.LoginAdmin.class}) @RequestBody Request request)
     {
         return adminService.adminLogin(request.getAdminEmail(), request.getAdminPassword());
