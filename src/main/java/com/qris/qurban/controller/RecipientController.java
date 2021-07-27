@@ -31,7 +31,7 @@ public class RecipientController
         return recipientService.addRecipient(request);
     }
 
-    @GetMapping("/recipient-login")
+    @PostMapping("/recipient-login")
     public Recipient recipientLogin(@Validated({Request.RecipientLogin.class}) @RequestBody Request request)
     {
         return recipientService.recipientLogin(request.getRecipientEmail(), request.getRecipientPassword());

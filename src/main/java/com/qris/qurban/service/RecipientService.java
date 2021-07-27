@@ -79,17 +79,36 @@ public class RecipientService
 
     private void getSortDirection(List<Order> orders, String[] sort)
     {
-        for (String sortOrder : sort)
+        int lengthArr = sort.length;
+
+        logger.debug("length: {}, sort: {}", lengthArr, Arrays.toString(sort));
+
+        // 1 sort, [recipientId, asc]
+        // 2 sort, [recipientId,desc, recipientYear]
+
+        int i = 0;
+
+        while (i < lengthArr)
         {
-            if (sortOrder.contains(","))
+            if (sort[i].contains(","))
             {
-                String[] sortOrderSplit = sortOrder.split(",");
+                logger.debug("AAA: {}", sort[i]);
+                String[] sortOrderSplit = sort[i].split(",");
                 orders.add(new Order(sortOrderSplit[1].equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortOrderSplit[0]));
             }
-            else if (!util.checkSortOrderType(sortOrder))
+            else if ((i + 1 < lengthArr) && util.checkSortOrderType(sort[i + 1]))
             {
-                orders.add(new Order(Sort.Direction.ASC, sortOrder));
+                logger.debug("BBB: {}, {}", sort[i], sort[i + 1]);
+                orders.add(new Order(sort[i + 1].equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sort[i]));
+                i++;
             }
+            else if (!util.checkSortOrderType(sort[i]))
+            {
+                logger.debug("CCC: {}", sort[i]);
+                orders.add(new Order(Sort.Direction.ASC, sort[i]));
+            }
+
+            i++;
         }
     }
 
