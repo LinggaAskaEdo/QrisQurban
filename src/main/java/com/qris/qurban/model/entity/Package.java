@@ -17,7 +17,7 @@ public class Package extends AuditModel
     @Column(name = "PACKAGE_ID", nullable = false, updatable = false)
     private Long packageId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "RECIPIENT_ID", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

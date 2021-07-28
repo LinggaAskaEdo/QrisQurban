@@ -58,6 +58,9 @@ public class Recipient extends AuditModel
     @Column(name = "RECIPIENT_YEAR", nullable = false)
     private String recipientYear;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipient", optional = false)
+    private Package recipientPackage;
+
     public Long getRecipientId()
     {
         return recipientId;
@@ -146,5 +149,15 @@ public class Recipient extends AuditModel
     public void setRecipientYear(String recipientYear)
     {
         this.recipientYear = recipientYear;
+    }
+
+    public Package getRecipientPackage()
+    {
+        return recipientPackage;
+    }
+
+    public void setRecipientPackage(Package recipientPackage)
+    {
+        this.recipientPackage = recipientPackage;
     }
 }
