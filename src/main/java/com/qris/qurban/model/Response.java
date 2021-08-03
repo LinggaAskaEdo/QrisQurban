@@ -9,24 +9,24 @@ public class Response
     private String message;
     private String detailMessage;
     private Map<String, String> detailMessages;
-    private String serverity;
+    private String severity;
     private Boolean error;
 
-    public Response(int code, String message, String detailMessage, String serverity, boolean error)
+    public Response(int code, String message, String detailMessage, String severity, boolean error)
     {
         this.code = code;
         this.message = message;
         this.detailMessage = detailMessage;
-        this.serverity = serverity;
+        this.severity = severity;
         this.error = error;
     }
 
-    public Response(Integer code, String message, Map<String, String> detailMessages, String serverity, Boolean error)
+    public Response(Integer code, String message, Map<String, String> detailMessages, String severity, Boolean error)
     {
         this.code = code;
         this.message = message;
         this.detailMessages = detailMessages;
-        this.serverity = serverity;
+        this.severity = severity;
         this.error = error;
     }
 
@@ -70,14 +70,14 @@ public class Response
         this.detailMessages = detailMessages;
     }
 
-    public String getServerity()
+    public String getSeverity()
     {
-        return serverity;
+        return severity;
     }
 
-    public void setServerity(String serverity)
+    public void setSeverity(String severity)
     {
-        this.serverity = serverity;
+        this.severity = severity;
     }
 
     public Boolean getError()
