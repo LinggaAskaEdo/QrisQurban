@@ -6,6 +6,7 @@ import com.qris.qurban.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,5 +38,14 @@ public class AdminService
             throw new NotFoundException();
 
         return admin;
+    }
+
+    public ResponseEntity<Object> deleteAdmin(Long adminId)
+    {
+        return adminRepository.findById(adminId).map(admin -> {
+            adminRepository.delete(admin);
+
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new NotFoundException("AdminId " + adminId + " not found"));
     }
 }
