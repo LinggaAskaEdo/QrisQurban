@@ -1,7 +1,11 @@
 package com.qris.qurban.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.qris.qurban.model.entity.Recipient;
+
 import java.util.Map;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response
 {
     // Error
@@ -11,6 +15,13 @@ public class Response
     private Map<String, String> detailMessages;
     private String severity;
     private Boolean error;
+
+    private Recipient recipient;
+    private int totalRecipients;
+    private int totalRedeemed;
+
+    public Response()
+    {}
 
     public Response(int code, String message, String detailMessage, String severity, boolean error)
     {
@@ -88,5 +99,35 @@ public class Response
     public void setError(Boolean error)
     {
         this.error = error;
+    }
+
+    public Recipient getRecipient()
+    {
+        return recipient;
+    }
+
+    public void setRecipient(Recipient recipient)
+    {
+        this.recipient = recipient;
+    }
+
+    public int getTotalRecipients()
+    {
+        return totalRecipients;
+    }
+
+    public void setTotalRecipients(int totalRecipients)
+    {
+        this.totalRecipients = totalRecipients;
+    }
+
+    public int getTotalRedeemed()
+    {
+        return totalRedeemed;
+    }
+
+    public void setTotalRedeemed(int totalRedeemed)
+    {
+        this.totalRedeemed = totalRedeemed;
     }
 }

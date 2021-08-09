@@ -1,6 +1,7 @@
 package com.qris.qurban.service;
 
 import com.qris.qurban.model.Request;
+import com.qris.qurban.model.Response;
 import com.qris.qurban.model.entity.Package;
 import com.qris.qurban.model.entity.Recipient;
 import com.qris.qurban.model.exception.ConflictException;
@@ -151,13 +152,20 @@ public class RecipientService
         }).orElseThrow(NotFoundException::new);
     }
 
-    public Recipient recipientLogin(String recipientEmail, String recipientPassword)
+    public Response recipientLogin(String recipientEmail, String recipientPassword)
     {
         Recipient recipient = recipientRepository.findFirstByRecipientEmailIsAndRecipientPasswordIs(recipientEmail, recipientPassword);
 
         if (null == recipient)
             throw new NotFoundException();
 
-        return recipient;
+        List<Recipient> recipients = recipientRepository.findByRecipientYearIs(recipient.getRecipientYear());
+
+        Response response = new Response();
+        response.setRecipient(recipient);
+        response.setTotalRecipients(recipients.size());
+        response.setTotalRedeemed((int) recipients.stream().filter(r -> r.getRecipientPackage().isPackageReceivedStatus()).count());
+
+        return response;
     }
 }
