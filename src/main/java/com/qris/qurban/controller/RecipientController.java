@@ -1,6 +1,7 @@
 package com.qris.qurban.controller;
 
 import com.qris.qurban.model.Request;
+import com.qris.qurban.model.Response;
 import com.qris.qurban.model.entity.Recipient;
 import com.qris.qurban.service.RecipientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class RecipientController
     }
 
     @PostMapping("/recipient-login")
-    public Recipient recipientLogin(@Validated({Request.RecipientLogin.class}) @RequestBody Request request)
+    public Response recipientLogin(@Validated({Request.RecipientLogin.class}) @RequestBody Request request)
     {
         return recipientService.recipientLogin(request.getRecipientEmail(), request.getRecipientPassword());
     }
