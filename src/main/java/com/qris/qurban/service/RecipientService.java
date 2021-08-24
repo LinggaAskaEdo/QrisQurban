@@ -164,6 +164,7 @@ public class RecipientService
         Response response = new Response();
         response.setRecipient(recipient);
         response.setTotalRecipients(recipients.size());
+        response.setTotalSent((int) recipients.stream().filter(r -> r.getRecipientPackage().isQrSentStatus()).count());
         response.setTotalRedeemed((int) recipients.stream().filter(r -> r.getRecipientPackage().isPackageReceivedStatus()).count());
 
         return response;

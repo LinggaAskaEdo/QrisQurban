@@ -18,6 +18,7 @@ public class Response
 
     private Recipient recipient;
     private int totalRecipients;
+    private int totalSent;
     private int totalRedeemed;
 
     public Response()
@@ -119,6 +120,16 @@ public class Response
     public void setTotalRecipients(int totalRecipients)
     {
         this.totalRecipients = totalRecipients;
+    }
+
+    public int getTotalSent()
+    {
+        return totalSent;
+    }
+
+    public void setTotalSent(int totalSent)
+    {
+        this.totalSent = totalSent;
     }
 
     public int getTotalRedeemed()
