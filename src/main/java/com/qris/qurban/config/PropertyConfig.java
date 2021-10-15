@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:application.properties")
 public class PropertyConfig
 {
-    private static final String PRIVATE_KEY = "Kut1lpecah";
+    private static final String PRIVATE_KEY = "1234";
     private static final String ALGORITHM = "PBEWithMD5AndDES";
 
     PropertyConfig()
